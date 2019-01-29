@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Core.Respository;
+using Library.Infrastructure.Repository;
+using Library.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,8 @@ namespace Library.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
