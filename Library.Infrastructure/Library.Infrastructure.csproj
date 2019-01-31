@@ -8,4 +8,9 @@
     <ProjectReference Include="../Library.Core/Library.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.0-beta1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
+  </ItemGroup>
+
 </Project>

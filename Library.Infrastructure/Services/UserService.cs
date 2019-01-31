@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Library.Core.Domain;
 using Library.Core.Respository;
 using Library.Infrastructure.DTO;
@@ -13,9 +14,9 @@ namespace Library.Infrastructure.Services
         {
             userRepository = _userRepository;
         }
-        public UserDto Get(string email)
+        public async Task<UserDto> Get(string email)
         {
-            var user = userRepository.Get(email);
+            var user = await userRepository.Get(email);
 
             return new UserDto
             {
@@ -25,9 +26,9 @@ namespace Library.Infrastructure.Services
             };
         }
 
-        public void Register(string email, string password, string username)
+        public async Task Register(string email, string password, string username)
         {
-            var user = userRepository.Get(email);
+            var user = await userRepository.Get(email);
 
             if (user != null)
             {
@@ -37,7 +38,7 @@ namespace Library.Infrastructure.Services
             var salt = Guid.NewGuid().ToString("N");
             user = new User(email, password, salt, username);
 
-            userRepository.Add(user);
+            await userRepository.Add(user);
         }
     }
 }
