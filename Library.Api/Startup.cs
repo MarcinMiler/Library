@@ -6,6 +6,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Library.Core.Respository;
 using Library.Infrastructure.IoC.Modules;
+using Library.Infrastructure.Mappers;
 using Library.Infrastructure.Repository;
 using Library.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,7 @@ namespace Library.Api
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddSingleton(AutoMapperConfig.Initialize());
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var builder = new ContainerBuilder();

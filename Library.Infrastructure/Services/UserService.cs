@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using Library.Core.Domain;
 using Library.Core.Respository;
 using Library.Infrastructure.DTO;
@@ -8,27 +9,24 @@ namespace Library.Infrastructure.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository _userRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
-            userRepository = _userRepository;
+            _userRepository = userRepository;
+            _mapper = mapper;
         }
         public async Task<UserDto> Get(string email)
         {
-            var user = await userRepository.Get(email);
+            var user = await _userRepository.Get(email);
 
-            return new UserDto
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Username = user.Username
-            };
+            return _mapper.Map<User, UserDto>(user);
         }
 
         public async Task Register(string email, string password, string username)
         {
-            var user = await userRepository.Get(email);
+            var user = await _userRepository.Get(email);
 
             if (user != null)
             {
@@ -38,7 +36,7 @@ namespace Library.Infrastructure.Services
             var salt = Guid.NewGuid().ToString("N");
             user = new User(email, password, salt, username);
 
-            await userRepository.Add(user);
+            await _userRepository.Add(user);
         }
     }
 }
