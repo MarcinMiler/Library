@@ -16,6 +16,10 @@ namespace Library.Infrastructure.IoC.Modules
                    .Where(x => x.IsAssignableTo<IService>())
                    .AsImplementedInterfaces()
                    .InstancePerLifetimeScope();
+
+            builder.RegisterType<JwtHandler>()
+                .As<IJwtHandler>()
+                .SingleInstance();
         }
     }
 }
