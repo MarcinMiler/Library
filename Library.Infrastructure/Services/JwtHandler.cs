@@ -1,10 +1,10 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Library.Infrastructure.DTO;
 using Library.Infrastructure.Settings;
-using System.Text;
 using Library.Infrastructure.Extensions;
 
 namespace Library.Infrastructure.Services
@@ -12,10 +12,12 @@ namespace Library.Infrastructure.Services
     public class JwtHandler : IJwtHandler
     {
         private readonly JwtSettings _settings;
+
         public JwtHandler(JwtSettings settings)
         {
             _settings = settings;
         }
+
         public JwtDto CreateToken(Guid userId, string role)
         {
             var now = DateTime.UtcNow;

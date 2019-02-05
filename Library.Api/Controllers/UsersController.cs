@@ -11,38 +11,35 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Api.Controllers
 {
-    [Route("[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : ApiControllerBase
     {
         private readonly IUserService _userService;
-        private readonly ICommandDispatcher _commandDispatcher;
-        private readonly IJwtHandler _jwtHandler;
-        public UsersController(IUserService userService, ICommandDispatcher commandDispatcher, IJwtHandler jwtHandler)
+
+
+        public UsersController(IUserService userService, ICommandDispatcher commandDispatcher)
+            : base(commandDispatcher)
         {
             _userService = userService;
-            _commandDispatcher = commandDispatcher;
-            _jwtHandler = jwtHandler;
         }
 
         [HttpGet("{email}")]
-        [Authorize]
+        // [Authorize]
         public async Task<UserDto> Get(string email) => await _userService.Get(email);
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody]CreateUser command)
         {
-            await _commandDispatcher.DispatchAsync(command);
+            await CommandDispatcher.DispatchAsync(command);
 
             return Created("users", new object());
         }
 
-        [HttpGet]
-        [Route("token")]
-        public IActionResult Get()
-        {
-            var token = _jwtHandler.CreateToken(Guid.NewGuid(), "user");
-            return Ok(token);
-        }
+        // [HttpGet]
+        // [Route("token")]
+        // public IActionResult Get()
+        // {
+        //     var token = _jwtHandler.CreateToken(Guid.NewGuid(), "user");
+        //     return Ok(token);
+        // }
     }
 }

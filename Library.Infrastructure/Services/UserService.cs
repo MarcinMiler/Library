@@ -24,6 +24,23 @@ namespace Library.Infrastructure.Services
             return _mapper.Map<User, UserDto>(user);
         }
 
+        public async Task Login(string email, string password)
+        {
+            var user = await _userRepository.Get(email);
+
+            if (user == null)
+            {
+                throw new Exception("Invalid Credentials.");
+            }
+
+            if (password == user.Password)
+            {
+                return;
+            }
+
+            throw new Exception("Invalid Credentials.");
+        }
+
         public async Task Register(string email, string password, string username)
         {
             var user = await _userRepository.Get(email);

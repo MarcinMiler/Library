@@ -40,7 +40,7 @@ namespace Library.Api
         {
             IdentityModelEventSource.ShowPII = true;
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddMemoryCache();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(x =>
                 {
