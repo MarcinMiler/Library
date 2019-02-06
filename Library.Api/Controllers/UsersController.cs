@@ -33,13 +33,5 @@ namespace Library.Api.Controllers
 
             return Created("users", new object());
         }
-
-        // [HttpGet]
-        // [Route("token")]
-        // public IActionResult Get()
-        // {
-        //     var token = _jwtHandler.CreateToken(Guid.NewGuid(), "user");
-        //     return Ok(token);
-        // }
     }
 }

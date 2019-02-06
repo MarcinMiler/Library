@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Library.Core.Respository;
+using Library.Infrastructure.EF;
 using Library.Infrastructure.IoC;
 using Library.Infrastructure.IoC.Modules;
 using Library.Infrastructure.Mappers;
@@ -38,8 +39,10 @@ namespace Library.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            IdentityModelEventSource.ShowPII = true;
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<LibraryContext>();
+
             services.AddMemoryCache();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(x =>

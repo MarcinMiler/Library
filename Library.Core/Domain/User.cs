@@ -20,6 +20,7 @@ namespace Library.Core.Domain
             Salt = salt;
             Username = username;
             CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }
