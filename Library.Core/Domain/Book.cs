@@ -6,13 +6,15 @@ namespace Library.Core.Domain
     {
         public Guid Id { get; protected set; }
         public string Title { get; protected set; }
-        public string Author { get; protected set; }
 
-        public Book(Guid bookId, string title, string author)
+        public Guid AuthorId { get; protected set; }
+        public Author Author { get; protected set; }
+
+        public Book(Guid id, string title, Guid authorId)
         {
-            Id = bookId;
+            Id = id;
             Title = title;
-            Author = author;
+            AuthorId = authorId;
         }
     }
 }

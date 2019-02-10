@@ -15,7 +15,6 @@ namespace Library.Api.Controllers
     {
         private readonly IUserService _userService;
 
-
         public UsersController(IUserService userService, ICommandDispatcher commandDispatcher)
             : base(commandDispatcher)
         {
@@ -23,8 +22,10 @@ namespace Library.Api.Controllers
         }
 
         [HttpGet("{email}")]
-        // [Authorize]
         public async Task<UserDto> Get(string email) => await _userService.Get(email);
+
+        // [HttpGet("{id}")]
+        // public async Task<UserDto> GetById(Guid id) => await _userService.Get(id);
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody]CreateUser command)

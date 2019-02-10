@@ -24,6 +24,13 @@ namespace Library.Infrastructure.Services
             return _mapper.Map<User, UserDto>(user);
         }
 
+        public async Task<UserDto> Get(Guid id)
+        {
+            var user = await _userRepository.Get(id);
+
+            return _mapper.Map<User, UserDto>(user);
+        }
+
         public async Task Login(string email, string password)
         {
             var user = await _userRepository.Get(email);
