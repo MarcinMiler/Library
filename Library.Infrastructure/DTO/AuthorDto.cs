@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Library.Infrastructure.DTO
 {
@@ -6,5 +7,13 @@ namespace Library.Infrastructure.DTO
     {
         public Guid Id { get; set; }
         public string Fullname { get; set; }
+
+        public List<AuthorBook> Books { get; set; }
+    }
+
+    public class AuthorBook
+    {
+        public Guid Id { get; set; }
+        public string Title { get; set; }
     }
 }

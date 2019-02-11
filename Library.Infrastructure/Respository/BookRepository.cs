@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Library.Core.Domain;
 using Library.Core.Repository;
@@ -7,21 +6,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.Infrastructure.Respository
 {
-    public class AuthorRepository : IAuthorRepository, ISqlRepository
+    public class BookRepository : IBookRepository
     {
         private readonly LibraryContext _context;
 
-        public AuthorRepository(LibraryContext context)
+        public BookRepository(LibraryContext context)
         {
             _context = context;
         }
 
-        public async Task<Author> Get(Guid id)
-            => await _context.Authors.Include(x => x.Books).SingleOrDefaultAsync(x => x.Id == id);
+        public async Task<Book> Get(string title)
+            => await _context.Books.Include(x => x.Author).SingleOrDefaultAsync(x => x.Title == title);
 
-        public async Task Add(Author author)
+        public async Task Add(Book book)
         {
-            await _context.Authors.AddAsync(author);
+            await _context.AddAsync(book);
             await _context.SaveChangesAsync();
         }
     }

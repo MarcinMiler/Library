@@ -19,6 +19,12 @@ CREATE TABLE Authors
     Fullname nvarchar(100) not null,
 )
 
+CREATE TABLE Books
+(
+    Id uniqueidentifier primary key not null,
+    Title nvarchar(100) not null
+)
+
 SELECT *
 FROM Users;
 
@@ -40,3 +46,6 @@ SELECT *
 FROM Authors
 
 Drop table Authors
+
+SELECT *
+FROM Books

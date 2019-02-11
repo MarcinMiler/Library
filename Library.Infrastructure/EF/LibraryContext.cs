@@ -35,7 +35,9 @@ namespace Library.Infrastructure.EF
             authorBuilder.HasKey(x => x.Id);
 
             modelBuilder.Entity<Author>()
-                .HasMany(x => x.Books).WithOne(x => x.Author);
+                .HasMany<Book>(x => x.Books)
+                .WithOne(x => x.Author)
+                .HasForeignKey(x => x.AuthorId);
         }
     }
 }
