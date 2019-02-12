@@ -25,11 +25,22 @@ namespace Library.Infrastructure.Services
             return _mapper.Map<Book, BookDto>(book);
         }
 
-        public async Task Add(string title, Guid authorId)
+        public async Task Add(string title, Guid authorId, int stock)
         {
-            var book = new Book(Guid.NewGuid(), title, authorId);
+            var book = new Book(Guid.NewGuid(), title, authorId, stock);
 
             await _bookRepoistory.Add(book);
+        }
+
+        public async Task Update(Book book, int stock)
+        {
+            if (book == null)
+            {
+                return;
+            }
+
+            book.SetStock(stock);
+            await _bookRepoistory.Update(book);
         }
     }
 }

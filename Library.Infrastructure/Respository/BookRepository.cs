@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Library.Core.Domain;
 using Library.Core.Repository;
@@ -18,9 +19,18 @@ namespace Library.Infrastructure.Respository
         public async Task<Book> Get(string title)
             => await _context.Books.Include(x => x.Author).SingleOrDefaultAsync(x => x.Title == title);
 
+        public async Task<Book> Get(Guid bookId)
+            => await _context.Books.Include(x => x.Author).SingleOrDefaultAsync(x => x.Id == bookId);
+
         public async Task Add(Book book)
         {
             await _context.AddAsync(book);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Update(Book book)
+        {
+            _context.Books.Update(book);
             await _context.SaveChangesAsync();
         }
     }

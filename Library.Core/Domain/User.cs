@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Library.Core.Domain
 {
@@ -11,6 +12,8 @@ namespace Library.Core.Domain
         public string Username { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
+
+        public ICollection<Borrow> BorrowedBooks { get; protected set; }
 
         public User(string email, string password, string salt, string username)
         {

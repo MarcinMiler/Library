@@ -15,7 +15,7 @@ namespace Library.Infrastructure.Handlers.Books
         }
         public async Task HandleAsync(CreateBook command)
         {
-            await _bookService.Add(command.Title, command.AuthorId);
+            await _bookService.Add(command.Title, command.AuthorId, command.Stock);
         }
     }
 }

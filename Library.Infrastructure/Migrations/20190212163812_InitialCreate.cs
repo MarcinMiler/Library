@@ -42,6 +42,7 @@ namespace Library.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(nullable: true),
+                    Stock = table.Column<int>(nullable: false),
                     AuthorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -55,10 +56,37 @@ namespace Library.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Borrows",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    BookId = table.Column<Guid>(nullable: false),
+                    BorrowDate = table.Column<DateTime>(nullable: false),
+                    ReturnDate = table.Column<DateTime>(nullable: true),
+                    Status = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Borrows", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Borrows_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Books_AuthorId",
                 table: "Books",
                 column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Borrows_UserId",
+                table: "Borrows",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -67,10 +95,13 @@ namespace Library.Infrastructure.Migrations
                 name: "Books");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Borrows");
 
             migrationBuilder.DropTable(
                 name: "Authors");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

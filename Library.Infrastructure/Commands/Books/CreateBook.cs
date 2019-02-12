@@ -6,5 +6,6 @@ namespace Library.Infrastructure.Commands.Books
     {
         public string Title { get; set; }
         public Guid AuthorId { get; set; }
+        public int Stock { get; set; }
     }
 }

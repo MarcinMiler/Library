@@ -12,6 +12,7 @@ namespace Library.Infrastructure.Mappers
                 cfg.CreateMap<User, UserDto>();
                 cfg.CreateMap<Author, AuthorDto>();
                 cfg.CreateMap<Book, BookDto>();
+                cfg.CreateMap<Borrow, BorrowDto>();
             })
             .CreateMapper();
     }
