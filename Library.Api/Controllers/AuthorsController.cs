@@ -18,10 +18,10 @@ namespace Library.Api.Controllers
             _authorService = authorService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("/authors/{id}")]
         public async Task<AuthorDto> Get(Guid id) => await _authorService.Get(id);
 
-        [HttpPost]
+        [HttpPost("/authors")]
         public async Task<ActionResult> Post([FromBody]CreateAuthor command)
         {
             await CommandDispatcher.DispatchAsync(command);

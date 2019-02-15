@@ -21,13 +21,13 @@ namespace Library.Api.Controllers
             _userService = userService;
         }
 
-        [HttpGet("{email}")]
+        [HttpGet("/users/{email}")]
         public async Task<UserDto> Get(string email) => await _userService.Get(email);
 
-        // [HttpGet("{id}")]
-        // public async Task<UserDto> GetById(Guid id) => await _userService.Get(id);
+        [HttpGet("/users/id/{id}")]
+        public async Task<UserDto> Get(Guid id) => await _userService.Get(id);
 
-        [HttpPost]
+        [HttpPost("/users")]
         public async Task<ActionResult> Post([FromBody]CreateUser command)
         {
             await CommandDispatcher.DispatchAsync(command);

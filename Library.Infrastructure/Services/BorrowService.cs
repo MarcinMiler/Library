@@ -29,7 +29,7 @@ namespace Library.Infrastructure.Services
         public async Task<List<BorrowDto>> GetByUserId(Guid userId)
         {
             var borrows = await _borrowRepository.GetByUserId(userId);
-            Console.WriteLine(borrows.ToString(), userId, "LUL");
+
             return _mapper.Map<List<Borrow>, List<BorrowDto>>(borrows);
         }
 

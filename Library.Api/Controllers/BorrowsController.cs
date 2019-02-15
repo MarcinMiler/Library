@@ -19,21 +19,21 @@ namespace Library.Api.Controllers
             _borrowService = borrowService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("/borrows/{id}")]
         public async Task<BorrowDto> Get(Guid id) => await _borrowService.Get(id);
 
-        // [HttpGet("{id}")]
-        // public async Task<List<BorrowDto>> Get(Guid id) => await _borrowService.GetByUserId(id);
+        [HttpGet("/borrows/userId/{id}")]
+        public async Task<List<BorrowDto>> GetByUserId(Guid id) => await _borrowService.GetByUserId(id);
 
-        // [HttpPost]
-        // public async Task<ActionResult> Post([FromBody]BorrowBook command)
-        // {
-        //     await CommandDispatcher.DispatchAsync(command);
+        [HttpPost("/borrows/borrow")]
+        public async Task<ActionResult> Post([FromBody]BorrowBook command)
+        {
+            await CommandDispatcher.DispatchAsync(command);
 
-        //     return Created("borrows", new object());
-        // }
+            return Created("borrows", null);
+        }
 
-        [HttpPost]
+        [HttpPost("/borrows/return")]
         public async Task<ActionResult> Post([FromBody]ReturnBook command)
         {
             await CommandDispatcher.DispatchAsync(command);

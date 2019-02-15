@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Library.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("")]
     public abstract class ApiControllerBase : Controller
     {
         protected readonly ICommandDispatcher CommandDispatcher;

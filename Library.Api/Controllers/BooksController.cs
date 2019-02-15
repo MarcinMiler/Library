@@ -18,10 +18,10 @@ namespace Library.Api.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet("{title}")]
+        [HttpGet("/books/{title}")]
         public async Task<BookDto> Get(string title) => await _bookService.Get(title);
 
-        [HttpPost]
+        [HttpPost("/books")]
         public async Task<ActionResult> Post([FromBody]CreateBook command)
         {
             await CommandDispatcher.DispatchAsync(command);
